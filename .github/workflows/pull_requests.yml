@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/github-script@v3
         with:
+          if: ${{ github.event.pull_request.body == '' }}
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             await github.issues.addLabels({
