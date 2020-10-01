@@ -13,12 +13,6 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            await github.issues.addLabels({
-              ...context.repo,
-              issue_number: context.issue.number,
-              labels: ['invalid']
-            })
-
             await github.issues.createComment({
               ...context.repo,
               issue_number: context.issue.number,
