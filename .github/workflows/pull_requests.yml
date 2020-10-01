@@ -8,9 +8,24 @@ jobs:
   if_body_empty:
     runs-on: ubuntu-latest
     steps:
-    - uses: superbrothers/close-pull-request@v2
-      if: ${{ github.event.pull_request.body == '' }}
-      with:
-        comment: "We do not accept empty PRs. 😕 &nbsp;If you have any questions, please feel free to contact us. 👍"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            await github.issues.addLabels({
+              ...context.repo,
+              issue_number: context.issue.number,
+              labels: ['invalid']
+            })
+
+            await github.issues.createComment({
+              ...context.repo,
+              issue_number: context.issue.number,
+              body: 'We do not accept empty PRs. 😕 &nbsp;If you have any questions, please feel free to contact us. 👍'
+            })
+
+            await client.pulls.update({
+              ...context.repo,
+              pull_number: context.issue.number,
+              state: "closed"
+            })
