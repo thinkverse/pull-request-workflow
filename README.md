@@ -1,6 +1,6 @@
 # Testing GitHub workflows 🚧
 
-This repository is for testing Gitub workflows. That means this repository is filled with dummy `pull requests` and `issues`.
+This repository is for testing GitHub workflows. That means this repository is filled with dummy `pull requests` and `issues`.
 
 ### Workflows
 
