@@ -10,5 +10,5 @@ jobs:
     steps:
       - name: Dump GitHub context
         env:
-          GITHUB_HEAD_CONTEXT: ${{ toJson(github.head_ref) }}
+          GITHUB_HEAD_CONTEXT: ${{ toJson(github.event.head) }}
         run: echo "$GITHUB_HEAD_CONTEXT"
